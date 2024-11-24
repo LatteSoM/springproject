@@ -1,6 +1,9 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
@@ -12,12 +15,16 @@ public class Document {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)
+    @NotNull
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "document_type_id", nullable = false)
+    @NotNull
     private DocumentType documentType;
 
+    @NotBlank
+    @Size(max = 255, message = "Document number must be less 255 chars")
     @Column(unique = true, nullable = false)
     private String documentNumber;
 

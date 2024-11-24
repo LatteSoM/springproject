@@ -1,6 +1,9 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +13,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is mandatory")
+    @Size(max = 255, message = "Title must be less 255 chars")
     @Column(nullable = false)
     private String title;
 
@@ -18,12 +23,15 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id", nullable = false)
+    @NotNull
     private Project project;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_to_id")
     private Employee assignedTo;
 
+    @NotBlank
+    @Size(max = 50, message = "Status must be less 50 chars")
     @Column(nullable = false)
     private String status;
 

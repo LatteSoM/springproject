@@ -1,6 +1,8 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class DocumentType {
@@ -8,6 +10,8 @@ public class DocumentType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name is mandatory")
+    @Size(max = 50, message = "Name must be less than 50 characters")
     @Column(nullable = false)
     private String name;
 

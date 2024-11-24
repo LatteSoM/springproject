@@ -1,6 +1,7 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
@@ -12,14 +13,18 @@ public class Payroll {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)
+    @NotNull
     private Employee employee;
 
+    @NotNull
     @Column(nullable = false)
     private int year;
 
+    @NotNull
     @Column(nullable = false)
     private int month;
 
+    @NotNull
     @Column(nullable = false)
     private BigDecimal salary;
 
@@ -29,6 +34,7 @@ public class Payroll {
     @Column
     private BigDecimal deductions;
 
+    @NotNull
     @Column(nullable = false)
     private BigDecimal netSalary;
 

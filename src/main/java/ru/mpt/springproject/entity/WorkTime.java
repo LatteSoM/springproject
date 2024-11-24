@@ -1,5 +1,6 @@
 package ru.mpt.springproject.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,11 +13,14 @@ public class WorkTime {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)
+    @NotNull
     private Employee employee;
 
+    @NotNull
     @Column(nullable = false)
     private LocalDate date;
 
+    @NotNull
     @Column(nullable = false)
     private BigDecimal hoursWorked;
 
