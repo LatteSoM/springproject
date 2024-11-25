@@ -1,7 +1,6 @@
 package ru.mpt.springproject.entity;
-import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
@@ -9,7 +8,7 @@ import java.util.UUID;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "UUID")
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
     @Column(nullable = false)
@@ -18,32 +17,24 @@ public class Employee {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private LocalDate dateHired;
+    private String dateHired;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
-    }
-
-    @ManyToMany(mappedBy = "employees")
-    private Set<Project> projects;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<EmployeePosition> employeePositions;
 
     public UUID getId() {
         return id;
     }
 
-    public void setId(UUID   id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -71,11 +62,11 @@ public class Employee {
         this.email = email;
     }
 
-    public LocalDate getDateHired() {
+    public String getDateHired() {
         return dateHired;
     }
 
-    public void setDateHired(LocalDate dateHired) {
+    public void setDateHired(String dateHired) {
         this.dateHired = dateHired;
     }
 
@@ -85,5 +76,13 @@ public class Employee {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<EmployeePosition> getEmployeePositions() {
+        return employeePositions;
+    }
+
+    public void setEmployeePositions(Set<EmployeePosition> employeePositions) {
+        this.employeePositions = employeePositions;
     }
 }

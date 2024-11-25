@@ -1,6 +1,7 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Department {
@@ -11,15 +12,23 @@ public class Department {
     @Column(nullable = false)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column
     private String description;
 
-    public Long getId() {
-        return id;
+    public Set<Position> getPositions() {
+        return positions;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPositions(Set<Position> positions) {
+        this.positions = positions;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
@@ -30,11 +39,14 @@ public class Department {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public Long getId() {
+        return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setId(Long id) {
+        this.id = id;
     }
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Position> positions;
 }
