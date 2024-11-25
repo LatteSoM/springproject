@@ -1,5 +1,6 @@
 package ru.mpt.springproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -17,6 +18,7 @@ public class EmployeePosition {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", nullable = false)
     @NotNull
+    @JsonIgnore
     private Position position;
 
     @Column(nullable = false)

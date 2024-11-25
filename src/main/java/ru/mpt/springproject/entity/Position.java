@@ -1,4 +1,5 @@
 package ru.mpt.springproject.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -19,6 +20,7 @@ public class Position {
     @NotNull
     private Department department;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "position", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<EmployeePosition> employeePositions;
 

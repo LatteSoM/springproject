@@ -1,5 +1,6 @@
 package ru.mpt.springproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,6 +17,7 @@ public class User {
 
     @Column(nullable = false)
     @NotNull
+    @JsonIgnore
     private String password;
 
     public Long getId() {
@@ -72,6 +74,7 @@ public class User {
     @Column(nullable = false)
     private String role;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Employee employee;
 
