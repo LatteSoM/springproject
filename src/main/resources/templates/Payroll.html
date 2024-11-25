@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payrolls</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Payrolls</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Add Payroll</h2>
+            <form th:action="@{/payrolls}" th:object="${payroll}" method="post">
+                <div class="form-group">
+                    <label for="employee">Employee</label>
+                    <select class="form-control" id="employee" th:field="*{employee}">
+                        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <input type="number" class="form-control" id="year" th:field="*{year}" required>
+                </div>
+                <div class="form-group">
+                    <label for="month">Month</label>
+                    <input type="number" class="form-control" id="month" th:field="*{month}" required>
+                </div>
+                <div class="form-group">
+                    <label for="salary">Salary</label>
+                    <input type="number" class="form-control" id="salary" th:field="*{salary}" required>
+                </div>
+                <div class="form-group">
+                    <label for="bonuses">Bonuses</label>
+                    <input type="number" class="form-control" id="bonuses" th:field="*{bonuses}">
+                </div>
+                <div class="form-group">
+                    <label for="deductions">Deductions</label>
+                    <input type="number" class="form-control" id="deductions" th:field="*{deductions}">
+                </div>
+                <div class="form-group">
+                    <label for="netSalary">Net Salary</label>
+                    <input type="number" class="form-control" id="netSalary" th:field="*{netSalary}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Payroll</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Payrolls</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Salary</th>
+                    <th>Bonuses</th>
+                    <th>Deductions</th>
+                    <th>Net Salary</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="payroll : ${payrolls}">
+                    <td th:text="${payroll.id}"></td>
+                    <td th:text="${payroll.employee.firstName} + ' ' + ${payroll.employee.lastName}"></td>
+                    <td th:text="${payroll.year}"></td>
+                    <td th:text="${payroll.month}"></td>
+                    <td th:text="${payroll.salary}"></td>
+                    <td th:text="${payroll.bonuses}"></td>
+                    <td th:text="${payroll.deductions}"></td>
+                    <td th:text="${payroll.netSalary}"></td>
+                    <td>
+                        <a th:href="@{/payrolls/edit/{id}(id=${payroll.id})}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{/payrolls/delete/{id}(id=${payroll.id})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

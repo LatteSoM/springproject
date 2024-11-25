@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Documents</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Documents</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Add Document</h2>
+            <form th:action="@{/documents}" th:object="${document}" method="post">
+                <div class="form-group">
+                    <label for="employee">Employee</label>
+                    <select class="form-control" id="employee" th:field="*{employee}">
+                        <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="documentType">Document Type</label>
+                    <select class="form-control" id="documentType" th:field="*{documentType}">
+                        <option th:each="documentType : ${documentTypes}" th:value="${documentType.id}" th:text="${documentType.name}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="documentNumber">Document Number</label>
+                    <input type="text" class="form-control" id="documentNumber" th:field="*{documentNumber}" required>
+                </div>
+                <div class="form-group">
+                    <label for="issueDate">Issue Date</label>
+                    <input type="date" class="form-control" id="issueDate" th:field="*{issueDate}" required>
+                </div>
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date</label>
+                    <input type="date" class="form-control" id="expiryDate" th:field="*{expiryDate}">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Document</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Documents</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Document Type</th>
+                    <th>Document Number</th>
+                    <th>Issue Date</th>
+                    <th>Expiry Date</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="document : ${documents}">
+                    <td th:text="${document.id}"></td>
+                    <td th:text="${document.employee.firstName} + ' ' + ${document.employee.lastName}"></td>
+                    <td th:text="${document.documentType.name}"></td>
+                    <td th:text="${document.documentNumber}"></td>
+                    <td th:text="${document.issueDate}"></td>
+                    <td th:text="${document.expiryDate}"></td>
+                    <td>
+                        <a th:href="@{/documents/edit/{id}(id=${document.id})}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{/documents/delete/{id}(id=${document.id})}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

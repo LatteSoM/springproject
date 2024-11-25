@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">HR System</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/logout" class="btn btn-primary btn-block mb-2">Logout</a>
+            <div sec:authorize="hasAnyRole('ADMIN', 'USER', 'HR')">
+                <a href="/departments" class="btn btn-primary btn-block mb-2">Departments</a>
+                <a href="/document-types" class="btn btn-primary btn-block mb-2">Document Types</a>
+            </div>
+            <div sec:authorize="hasRole('HR')">
+                <a href="/positions" class="btn btn-primary btn-block mb-2">Positions</a>
+                <a href="/employees" class="btn btn-primary btn-block mb-2">Employees</a>
+                <a href="/employee-positions" class="btn btn-primary btn-block mb-2">Employee Positions</a>
+            </div>
+            <div sec:authorize="hasRole('ADMIN')">
+                <a href="/users" class="btn btn-primary btn-block mb-2">Users</a>
+            </div>
+            <div sec:authorize="hasAnyRole('USER', 'HR')">
+                <a href="/documents" class="btn btn-primary btn-block mb-2">Documents</a>
+            </div>
+            <div sec:authorize="hasAnyRole('USER', 'HR', 'ADMIN')">
+                <a href="/projects" class="btn btn-primary btn-block mb-2">Projects</a>
+                <a href="/tasks" class="btn btn-primary btn-block mb-2">Tasks</a>
+                <a href="/payrolls" class="btn btn-primary btn-block mb-2">Payrolls</a>
+            </div>
+            <div sec:authorize="hasAnyRole('HR', 'ADMIN')">
+                <a href="/work-times" class="btn btn-primary btn-block mb-2">Work Times</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

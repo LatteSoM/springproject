@@ -1,4 +1,4 @@
-package ru.mpt.springproject.controller;
+package ru.mpt.springproject.rest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
