@@ -1,6 +1,7 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class EmployeePosition {
@@ -10,13 +11,16 @@ public class EmployeePosition {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)
+    @NotNull
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", nullable = false)
+    @NotNull
     private Position position;
 
     @Column(nullable = false)
+    @NotNull
     private String startDate;
 
     @Column

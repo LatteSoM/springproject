@@ -1,6 +1,8 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -12,15 +14,19 @@ public class Employee {
     private UUID id;
 
     @Column(nullable = false)
+    @NotNull
     private String firstName;
 
     @Column(nullable = false)
+    @NotNull
     private String lastName;
 
     @Column(nullable = false, unique = true)
+    @NotNull
     private String email;
 
     @Column(nullable = false)
+    @NotNull
     private String dateHired;
 
     @OneToOne(fetch = FetchType.LAZY)

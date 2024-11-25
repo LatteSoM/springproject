@@ -26,7 +26,7 @@ public class UsersController {
 
     @PostMapping
     public String createUser(@ModelAttribute User user) {
-        userService.createUser(user);
+        userService.createUserBCrypt(user);
         return "redirect:/users";
     }
 

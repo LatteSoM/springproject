@@ -27,4 +27,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User createUserBCrypt(User user) {
+        User userx = new User();
+        userx.setId(user.getId());
+        userx.setUsername(user.getUsername());
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        userx.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userx.setRole(user.getRole());
+        return userRepository.save(userx);
+    }
+
 }

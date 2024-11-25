@@ -1,5 +1,6 @@
 package ru.mpt.springproject.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
@@ -10,10 +11,12 @@ public class Position {
     private Long id;
 
     @Column(nullable = false)
+    @NotNull
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)
+    @NotNull
     private Department department;
 
     @OneToMany(mappedBy = "position", cascade = CascadeType.ALL, orphanRemoval = true)

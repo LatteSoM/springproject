@@ -1,6 +1,8 @@
 package ru.mpt.springproject.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+
 import java.util.Set;
 
 @Entity
@@ -10,6 +12,7 @@ public class Department {
     private Long id;
 
     @Column(nullable = false)
+    @Valid
     private String name;
 
     @Column
